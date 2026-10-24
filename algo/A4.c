@@ -42,8 +42,8 @@ int main() {
     // la complexité temporelle au pire cas --> O(sqrt(N))
 }*/
 
-int A4(int N){
-        int premier = 1, i;
+int A4(long long N){
+        int premier = 1, i;//2U
 
    if (N ==0 || N==1 ||N %2==0) {   // 2U
         premier = 0;  //1U 
