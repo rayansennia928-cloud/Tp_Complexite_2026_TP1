@@ -25,7 +25,7 @@ int main()
     char *fichiers[] = {
         "Random100.txt",
         "Random1000.txt",
-        "Test-1.txt",
+        "test-1.txt",
         "Test-2.txt",
         "Test-3.txt"
     };
