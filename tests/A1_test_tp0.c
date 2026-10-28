@@ -24,7 +24,7 @@ double temps;
 char ligne[256];
 char *p, *finLecture;
 
-csv = fopen("resultats.csv", "w");
+csv = fopen("resultats_A1.csv", "w");
 
 if (csv == NULL)
 {
