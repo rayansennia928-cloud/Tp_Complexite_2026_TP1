@@ -19,10 +19,7 @@ int A3(long long N)
     }
     else
     {
-        // Complexite theorique :
-        // Meilleur cas : O(1)
-        // Pire cas : O(sqrt(N))
-
+        
         for (i = 3; i <= sqrt((double)N); i += 2)
         {
             if (N % i == 0)
