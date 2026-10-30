@@ -1,33 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "A2.h"
 
 #define MAX 10000
-
-int estPremier(long long N)
-{
-    long long i;
-
-    if (N < 2)
-        return 0;
-
-    for (i = 2; i <= N / 2; i++)
-    {
-        if (N % i == 0)
-            return 0;
-    }
-
-    return 1;
-}
 
 int main()
 {
     char *fichiers[] = {
-        "../../Test-1_skakri_bouchra/test-1.txt",
-        "../../Test-2-Selma-BOUKACEM/Test-2.txt",
-        "../../Test-3-RayanSennia/Test-3.txt"
-        "../../zikioufatimaamira-tache1-/Random100.txt",
-        "../../zikioufatimaamira-tache1-/Random1000.txt",
+        "Random100.txt",
+        "Random1000.txt",
+        "test-1.txt",
+        "test-2.txt",
+        "Test-3.txt"
     };
 
     FILE *f, *resultats;
@@ -47,7 +32,7 @@ int main()
     }
 
     fprintf(resultats,
-            "Fichier | Nombre | Resultat | Temps_secondes\n");
+            "Fichier; Nombre; Resultat; Temps_secondes\n");
 
     for (k = 0; k < 5; k++)
     {
@@ -78,7 +63,7 @@ int main()
 
             debut = clock();
 
-            resultat = estPremier(N);
+            resultat = A2(N);
 
             fin = clock();
 
