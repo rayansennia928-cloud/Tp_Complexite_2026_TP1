@@ -1,43 +1,33 @@
-#include <stdio.h>
-#include <time.h>
+#include <math.h>
 
-int main()
+int A2(long long N)
 {
-    int N;
-    int i;
-    int premier;
-    clock_t debut,fin;
-    double temps;
+    int premier = 1;
+    long long i;
 
-    printf("Donner un nombre N : ");
-    scanf("%d", &N);
-
-    premier = 1;
-
-    debut = clock();
-
-    for (i = 2; i <= N / 2; i++)
+    if (N <= 1)
     {
-        if (N % i == 0)
-        {
-            premier = 0;
-            break;
-        }
+        premier = 0;
     }
-
-    fin = clock();
-    temps= (double)(fin-debut)/CLOCKS_PER_SEC;
-
-    if (premier == 1)
+    else if (N == 2)
     {
-        printf("%d est premier.\n", N);
+        premier = 1;
+    }
+    else if (N % 2 == 0)
+    {
+        premier = 0;
     }
     else
     {
-        printf("%d n'est pas premier.\n", N);
+        for (i = 3; i <= sqrt((double)N); i += 2)
+        {
+            if (N % i == 0)
+            {
+                premier = 0;
+                break;
+            }
+        }
     }
 
-    printf("Temps d'execution : %f secondes\n", temps);
-
-    return 0;
+    return premier;
 }
