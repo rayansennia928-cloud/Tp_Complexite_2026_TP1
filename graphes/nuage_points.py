@@ -1,7 +1,4 @@
-"""Nuage de points : temps d'exécution en fonction de n (A1..A4)
-Usage : python nuage_points.py resultats.csv [nmax]
-  nmax (optionnel) : ne garder que n <= nmax et axe n linéaire (ex. 400000)
-"""
+
 import re
 import sys
 import matplotlib.pyplot as plt
