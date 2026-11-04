@@ -1,0 +1,83 @@
+TP1 - TEST DE PRIMALITE - ALGORITHME A1
+nbr d'itération : N-2
+Complexite theorique : O(N)
+
++----+------------------+-------------+------------------+
+| N° | Nombre N         | Resultat    | Temps (s)        |
++----+------------------+-------------+------------------+
+| 1  | 1000003          | Premier     | 0.003000         |
+| 2  | 2000003          | Premier     | 0.011000         |
+| 3  | 4000037          | Premier     | 0.020000         |
+| 4  | 8000009          | Premier     | 0.027000         |
+| 5  | 16000057         | Premier     | 0.081000         |
+| 6  | 32000011         | Premier     | 0.106000         |
+| 7  | 64000031         | Premier     | 0.235000         |
+| 8  | 128000003        | Premier     | 0.426000         |
+| 9  | 256000001        | Premier     | 0.850000         |
+| 10 | 512000009        | Premier     | 1.665000         |
+| 11 | 1024000009       | Premier     | 3.471000         |
+| 12 | 2048000011       | Premier     | 7.343000         |
++----+------------------+-------------+------------------+
+
+Remarque générale :
+
+Les résultats confirment la complexité théorique O(N) de l’algorithme A1 : le temps d’exécution croît proportionnellement à la valeur de N.
+
+Observations :
+
+Tous les nombres testés sont premiers. C’est le pire cas pour A1, car la boucle va jusqu’à N-1 sans jamais s’arrêter prématurément. Les temps mesurés sont donc des temps maximaux.
+Le temps double quand N double. Par exemple : 0.426 s pour 128 000 003, 0.850 s pour 256 000 001, 1.665 s pour 512 000 009, puis 3.471 s pour 1 024 000 009 et 7.343 s pour 2 048 000 011. Le rapport entre deux lignes successives est proche de 2, ce qui est la signature d’une complexité linéaire.
+Les petites valeurs sont moins précises. Pour N < 10 millions, les temps (0.003 s, 0.011 s...) sont très courts et la résolution de clock() introduit du bruit, d’où des écarts de proportionnalité plus marqués.
+
+-le tests des cinq jeux de données :
+on prend des valeurs aléatoire de CSV pour observer les résultats :
+
+N               T (s)    T/N (ns)  N/N préc.  T/T préc.
+32 306 011      0,184    5,7       -          -
+63 961 019      0,274    4,3       1,98       1,49
+129 950 659     0,558    4,3       2,03       2,04
+264 093 139     1,256    4,8       2,03       2,25
+523 791 803     2,341    4,5       1,98       1,86
+1 023 958 751   4,386    4,3       1,95       1,87
+1 998 464 491   8,577    4,3       1,95       1,96
+3 910 691 593   16,796   4,3       1,96       1,96
+7 645 720 001   44,129   5,8       1,96       2,63
+
+
+c) Que remarque-t-on ?
+
+Sur les données :
+- Tous les nombres du CSV (hors Test-3.txt) sont premiers. Pour un nombre
+  premier, la boucle de A1.c ne s'arrête jamais avant la fin (pas de break) :
+  on est toujours dans le pire cas.
+- Chaque N est environ le double du précédent (rapport ~ 2).
+
+Sur les mesures :
+- Quand N double, T double aussi (rapport ~ 2).
+- Le rapport T/N reste presque constant, autour de 4,3 à 4,8 ns.
+- Écarts : 63 961 019 (x1,49) et 7 645 720 001 (x2,63) s'écartent de 2. Ce sont
+  des perturbations de la machine (processus concurrents, cache, timer imprécis
+  pour les petits temps). Les valeurs très élevées du CSV, comme
+  8092485407 -> 38 258 s, ont la même cause : on les écarte ou on refait la mesure.
+- Pour les petits nombres (< 10^6, test-1.txt), T vaut 0 à 0,006 s, ce qui est
+  trop petit pour être mesuré précisément.
+
+
+d) Complexité théorique vs mesures expérimentales
+
+Théorie :
+- La boucle for (i = 2; i < N; i++) de A1.c fait N-2 itérations quand N est
+  premier. Chaque itération coûte un temps constant (un modulo, une comparaison).
+- La complexité au pire cas est donc O(N), linéaire : si N double, T double.
+
+Expérience :
+- Sur le CSV, T(2N) ~ 2.T(N) et T ~ 4,3.10^-9 x N.
+- Exemple : 1 998 464 491 -> 8,58 s, puis 3 910 691 593 -> 16,80 s.
+  N est multiplié par 1,96 et T par 1,96.
+
+Conclusion :
+- Les prédictions théoriques sont compatibles avec les mesures expérimentales.
+- T(N) est une droite passant par l'origine, ce qui correspond bien à O(N).
+- La constante ~ 4,3 ns dépend de la machine, pas de l'algorithme.
+- Limite : A1 devient inutilisable pour de grands N (plus de 40 s à 10^10).
+  C'est ce qui motive A2, A3 et A4.
