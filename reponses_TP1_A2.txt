@@ -1,0 +1,51 @@
+TP N°1 – Test de primalité – Algorithme A2 (division par les nombres impairs jusqu'à √N)
+
+N	                T (s)	    T/N (ns)          N/N préc.	    T/T préc.
+32 306 011	      0,0001771	    0,00548	            -	            -
+63 961 019	      0,0002589	    0,00405	            1,98	      1,46
+129 950 659	      0,0003320	    0,00255	            2,03	      1,28
+264 093 139	      0,0004522	    0,00171	            2,03	      1,36
+523 791 803	      0,0006611	    0,00126	            1,98	      1,46
+1 023 958 751	  0,0008961	    0,00088	            1,95	      1,36
+1 998 464 491	  0,0010622	    0,00053	            1,95	      1,19
+3 910 691 593	  0,0015113	    0,00039	            1,96	      1,42
+7 645 720 001	  0,0022786	    0,00030	            1,96	      1,51
+
+c) Que remarque-t-on ?
+
+Sur les données :
+-Le fichier Test-3.txt contient des nombres de tailles très différentes, allant de quelques centaines à environ (10^11).
+-La majorité des nombres testés sont non premiers.
+-Quelques nombres sont premiers, par exemple 277, 883, 101 et 125959.
+-Les tailles des nombres ne suivent pas une progression régulière.
+
+Sur les mesures :
+-Presque tous les temps d'exécution sont égaux à 0.000000 seconde.
+-Une seule mesure est égale à 0.001000 seconde, pour N = 125959.
+-Ces temps sont trop petits pour être mesurés précisément avec le chronométrage utilisé.
+-Il est donc impossible de calculer des rapports T\T(précédent) fiables.
+
+d) Complexité théorique vs mesures expérimentales
+
+Théorie :
+-L'algorithme A2 commence par traiter les cas particuliers : N<=1, N = 2 et les nombres pairs.
+-Pour les nombres impairs supérieurs à 2, il teste uniquement les diviseurs impairs à partir de 3.
+-La boucle s'arrête lorsque √N car si un nombre possède un diviseur autre que 1 et lui-même, il en possède nécessairement un inférieur ou égal à √N.
+-Le pas de la boucle est de 2 (i += 2), donc seuls les nombres impairs sont testés.
+-La boucle s'arrête lorsque √N car si un nombre possède un diviseur autre que 1 et lui-même, il en possède nécessairement un inférieur ou égal à √N.
+-Dans le pire cas, notamment lorsque N est premier, la boucle effectue environ √N itérations.
+La complexité au pire cas est donc :
+O(√N)
+
+Expérience :
+-Les temps enregistrés dans resultats_A2.csv sont presque tous nuls.
+-Les mesures sont trop faibles pour observer précisément l'évolution du temps.
+-Il est donc impossible de vérifier expérimentalement que le temps évolue proportionnellement à √N.
+-Pour obtenir des résultats plus précis, il faudrait répéter chaque test plusieurs fois et calculer le temps moyen.
+
+Conclusion :
+-A2 est plus efficace que A1 sur le plan théorique.
+-A1 teste potentiellement jusqu'à N, tandis que A2 teste uniquement les diviseurs impairs jusqu'à √N.
+-A2 réduit donc considérablement le nombre de divisions nécessaires.
+-Sa complexité au pire cas est √N, contre O(N) pour A1.
+-Les mesures actuelles ne permettent pas de confirmer précisément cette amélioration, à cause de la faible précision du chronométrage.
