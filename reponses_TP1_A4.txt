@@ -1,0 +1,54 @@
+TP N°1 - Test de primalité - Algorithme A4 
+
+
+N               T (s)    T/N (ns)  N/N préc.  T/T préc.
+32 306 011      0,001   0,03        -           -
+63 961 019      0,001	0,016       1,98        1,0
+129 950 659     0,001	0,008	    2,03	    1,0
+264 093 139     0,001   0,004	    2,03	    1,0
+523 791 803     0,001   0,002       1,98        1,0
+1 023 958 751   0,001   0,001       1,95        1,0
+1 998 464 491   0,001   0,0005      1,95        1,0
+3 910 691 593   0,001  0,00025     1,96        1,0
+7 645 720 001   0,002  0,00026     1,96        2,0
+
+
+c) Que remarque-t-on ?
+
+Sur les données :
+-Les nombres testés sont tous premiers. Pour A4, la boucle for (i=3; i<=sqrt(N); i+=2) s'exécute jusqu'à \(\sqrt N\), sans rencontrer de diviseur. Nous sommes donc dans le pire cas.
+-Chaque valeur de \(N\) est approximativement le double de la précédente (rapport proche de 2).
+-Lorsque \(N\) double, sa racine carrée est multipliée par \(\sqrt 2 \approx 1,41\). Cela explique pourquoi A4 présente une croissance théorique plus lente que A1.
+
+Sur les mesures :
+- Temps d'exécution : Contrairement à A1, où le temps augmente approximativement avec N, le temps mesuré pour A4 reste presque constant, autour de \(10^{-3}\) seconde. Cette stabilité apparente s'explique notamment par la faible durée d'exécution.
+-Rapport T/N : Le rapport T/N diminue lorsque N augmente. Cela montre que le temps de calcul par unité de N devient de plus en plus faible.
+-Rapport T/T préc. : Les rapports mesurés sont proches de 1, alors que la théorie prévoit un rapport proche de 1,41 lorsque N double. Cette différence peut être liée à la précision limitée des mesures.
+-Écarts : Les petites variations observées entre les mesures peuvent être dues aux perturbations du système, aux processus concurrents et aux limites du chronométrage.
+
+**Comparaison avec A1 : Pour N=7,6×(10^9), A1 met 44,129 secondes, tandis que A4 met environ 0,002 seconde. Le gain est de l'ordre de 22 000×.
+**Comparaison avec A2 et A3 : Les codes de A2, A3 et A4 sont strictement identiques (même boucle, mêmes optimisations). Leurs performances sont donc théoriquement identiques. Les légères différences observées sur les graphiques (A3 montre quelques pics sporadiques) sont dues à des perturbations système et non à des différences algorithmiques.
+
+d) Complexité théorique vs mesures expérimentales
+
+Théorie :
+L'algorithme A4 utilise deux optimisations :
+- Il élimine les nombres pairs en augmentant le diviseur de 2 à chaque itération (i += 2).
+- Il limite la recherche des diviseurs à \(\sqrt N\), car il n'est pas nécessaire de tester au-delà de cette limite.
+Le nombre d'itérations dans le pire cas est approximativement :k=sqrt(N) /2
+Chaque itération effectue un nombre constant d'opérations : une comparaison, un modulo et une incrémentation.
+
+La complexité temporelle au pire cas est donc :Theta(sqrt (N))
+
+
+Expérience :
+- Dans les mesures obtenues, le temps d'exécution de A4 reste presque constant, autour de (0,001) seconde, même lorsque N double.
+-Le rapport expérimental (T(2N)/T(N)) est proche de 1, alors que la théorie prévoit une valeur proche de 1,41.
+-Cette différence ne signifie pas que l'analyse théorique est incorrecte. Elle peut s'expliquer par les très faibles durées d'exécution et la précision limitée du chronométrage, qui rendent difficile l'observation de la croissance réelle du temps.
+
+Conclusion :
+- Les résultats expérimentaux sont globalement compatibles avec la complexité théorique de A4, soit Theta(sqrt (N)), même si les mesures ne permettent pas de vérifier précisément cette croissance.
+-A4 est nettement plus efficace que A1 pour les grandes valeurs de N, grâce à la réduction du nombre de diviseurs à tester.
+-La courbe expérimentale T(N) peut sembler presque horizontale à l'échelle du graphique, mais cela ne signifie pas que la complexité est constante. La croissance théorique reste proportionnelle à (sqrt (N)).
+
+**Limite : Les temps d'exécution de A4 sont très faibles, ce qui rend leur mesure difficile avec précision. Pour mieux vérifier la complexité, il serait préférable de répéter chaque test plusieurs fois et de calculer le temps moyen.
